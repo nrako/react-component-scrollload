@@ -1,6 +1,6 @@
 {
   "name": "react-continuous-scroll",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "React component to implement continuous/infinite scroll",
   "main": "index.js",
   "keywords": ["react", "infinite", "continuous", "scroll"],
