@@ -1,0 +1,19 @@
+{
+  "name": "react-continuous-scroll",
+  "version": "0.0.0",
+  "description": "React component to implement continuous/infinite scroll",
+  "main": "index.js",
+  "keywords": ["react", "infinite", "continuous", "scroll"],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nrako/react-continuous-scroll.git"
+  },
+  "author": "@nrako",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^0.11.1"
+  }
+}
