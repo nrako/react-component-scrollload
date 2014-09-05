@@ -11,16 +11,23 @@ var ContinuousScroll = React.createClass({
     loadMore: React.PropTypes.func.isRequired,
     isLoading: React.PropTypes.bool.isRequired,
     threshold: React.PropTypes.number,
-    loader: React.PropTypes.component
+    loader: React.PropTypes.component,
+    disablePointer: React.PropTypes.number,
+    disablePointerClass: React.PropTypes.string
   },
   getDefaultProps: function () {
     return {
       threshold: 1000,
       loader: React.DOM.div(null, 'Loading...'),
+      disablePointer: 0,
+      disablePointerClass: 'disable-pointer'
     };
   },
-  watching: false,
+  disablePointerTimeout: null,
   onScroll: function () {
+    if (this.props.disablePointer > 0)
+      this.disablePointer();
+
     if (!this.props.hasMore || this.props.isLoading)
       return;
 
@@ -29,14 +36,23 @@ var ContinuousScroll = React.createClass({
     if (el.scrollTop + el.offsetHeight + this.props.threshold < el.scrollHeight)
       return;
 
-    this.unwatch();
     this.props.loadMore();
   },
+  disablePointer: function () {
+    if (this.disablePointerTimeout === null)
+      this.refs.wrapper.getDOMNode().classList.add(this.props.disablePointerClass);
+
+    clearTimeout(this.disablePointerTimeout);
+    this.disablePointerTimeout = setTimeout(this.removeDisablePointerClass, this.props.disablePointer);
+  },
+  removeDisablePointerClass: function () {
+    this.refs.wrapper.getDOMNode().classList.remove(this.props.disablePointerClass);
+    this.disablePointerTimeout = null;
+  },
   componentDidMount: function () {
-    this.watch();
+    this.listenScroll();
   },
   componentDidUpdate: function () {
-    this.watch();
     var el = this.getDOMNode();
 
     // when component update need to check if loaded children height are bigger than threshold else load more
@@ -44,26 +60,20 @@ var ContinuousScroll = React.createClass({
     setTimeout(this.onScroll);
   },
   componentWillUnmount: function () {
-    this.unwatch();
+    this.unlistenScroll();
   },
-  watch: function () {
-    if (this.watching || !this.props.hasMore)
-      return;
-
+  listenScroll: function () {
     this.getDOMNode().addEventListener('scroll', this.onScroll);
     window.addEventListener('resize', this.onScroll);
-
-    this.watching = true;
   },
-  unwatch: function () {
+  unlistenScroll: function () {
     this.getDOMNode().removeEventListener('scroll', this.onScroll);
     window.removeEventListener('resize', this.onScroll);
-
-    this.watching = false;
   },
   componentWillReceiveProps: function (nextProps) {
-    if (!nextProps.hasMore)
-      this.unwatch();
+    // if there is no need to listen on scroll anymore
+    if (!nextProps.hasMore && this.props.disablePointer <= 0)
+      this.unlistenScroll();
   },
   render: function() {
 
