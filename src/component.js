@@ -72,7 +72,9 @@ var ContinuousScroll = React.createClass({
   },
   componentWillReceiveProps: function (nextProps) {
     // if there is no need to listen on scroll anymore
-    if (!nextProps.hasMore && this.props.disablePointer <= 0)
+    if (nextProps.hasMore)
+      this.listenScroll();
+    else if (this.props.disablePointer <= 0)
       this.unlistenScroll();
   },
   render: function() {
