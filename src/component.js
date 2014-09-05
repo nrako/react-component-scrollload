@@ -9,7 +9,7 @@ var ContinuousScroll = React.createClass({
   propTypes: {
     hasMore: React.PropTypes.bool.isRequired,
     loadMore: React.PropTypes.func.isRequired,
-    loading: React.PropTypes.bool.isRequired,
+    isLoading: React.PropTypes.bool.isRequired,
     threshold: React.PropTypes.number,
     loader: React.PropTypes.component
   },
@@ -21,7 +21,7 @@ var ContinuousScroll = React.createClass({
   },
   watching: false,
   onScroll: function () {
-    if (!this.props.hasMore || this.props.loading)
+    if (!this.props.hasMore || this.props.isLoading)
       return;
 
     var el = this.getDOMNode();
@@ -72,7 +72,7 @@ var ContinuousScroll = React.createClass({
         React.DOM.div({ref: 'wrapper'},
           this.props.children
         ),
-        this.props.loading && this.props.loader
+        this.props.isLoading && this.props.loader
       )
     );
   }

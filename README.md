@@ -1,23 +1,26 @@
-React Continuous Scroll Component
+React Scroll Load Component
 =================================
 
-A React component to implement continuous scrolling for **modern browser**.
+A dummy React component to implement continuous load on scroll for **modern browser**.
 
 ### Usage
+```
+var ScrollLoad = require('react-component-scrollload');
+```
 ```html
-<ContinuousScroll className="via transferPropsTo" loadMore={this.loadMore} hasMore={!!this.state.meta.next} loading={this.state.loading} loader={<div className="loading"><img src="/img/loading.svg" /></div>}>
+<ScrollLoad className="via transferPropsTo" loadMore={this.loadMore} hasMore={!!this.state.meta.next} isLoading={this.state.loading} loader={<div className="loading"><img src="/img/loading.svg" /></div>}>
   {items}
-</ContinuousScroll>
+</ScrollLoad>
 ```
 
-`npm install react-continuous-scroll --save`
+`npm install react-component-scroll --save`
 
 ### Prop types
 ```javascript
 propTypes: {
   hasMore: React.PropTypes.bool.isRequired, // if there is more to load
   loadMore: React.PropTypes.func.isRequired, // callback to load more
-  loading: React.PropTypes.bool.isRequired, // indicate if a loading is ongoing
+  isLoading: React.PropTypes.bool.isRequired, // indicate if a loading is ongoing
   threshold: React.PropTypes.number, // pixel threshold, default 1000
   loader: React.PropTypes.component // displayed loader component, default React.DOM.div(null, 'Loading...')
 }

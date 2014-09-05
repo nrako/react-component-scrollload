@@ -1,15 +1,15 @@
 {
-  "name": "react-continuous-scroll",
+  "name": "react-component-scrollload",
   "version": "0.0.1",
-  "description": "React component to implement continuous/infinite scroll",
+  "description": "React component to implement continuous load on scroll",
   "main": "index.js",
-  "keywords": ["react", "infinite", "continuous", "scroll"],
+  "keywords": ["react", "infinite", "continuous", "scroll", "react-component"],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/nrako/react-continuous-scroll.git"
+    "url": "git://github.com/nrako/react-component-scrollload.git"
   },
   "author": "@nrako",
   "license": "MIT",
