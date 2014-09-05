@@ -4,7 +4,7 @@ React Continuous Scroll Component
 A React component to implement continuous scrolling for **modern browser**.
 
 ### Usage
-```javascript
+```html
 <ContinuousScroll className="via transferPropsTo" loadMore={this.loadMore} hasMore={!!this.state.meta.next} loading={this.state.loading} loader={<div className="loading"><img src="/img/loading.svg" /></div>}>
   {items}
 </ContinuousScroll>
