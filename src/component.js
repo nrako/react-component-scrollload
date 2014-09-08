@@ -46,7 +46,9 @@ var ContinuousScroll = React.createClass({
     this.disablePointerTimeout = setTimeout(this.removeDisablePointerClass, this.props.disablePointer);
   },
   removeDisablePointerClass: function () {
-    this.refs.wrapper.getDOMNode().classList.remove(this.props.disablePointerClass);
+    if (this.refs.wrapper)
+      this.refs.wrapper.getDOMNode().classList.remove(this.props.disablePointerClass);
+
     this.disablePointerTimeout = null;
   },
   componentDidMount: function () {
