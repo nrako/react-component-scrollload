@@ -25,6 +25,9 @@ var ContinuousScroll = React.createClass({
   },
   disablePointerTimeout: null,
   onScroll: function () {
+    if (!this.isMounted())
+      return;
+
     if (this.props.disablePointer > 0)
       this.disablePointer();
 
