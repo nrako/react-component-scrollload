@@ -11,7 +11,7 @@ var ContinuousScroll = React.createClass({
     loadMore: React.PropTypes.func.isRequired,
     isLoading: React.PropTypes.bool.isRequired,
     threshold: React.PropTypes.number,
-    loader: React.PropTypes.component,
+    loader: React.PropTypes.element,
     disablePointer: React.PropTypes.number,
     disablePointerClass: React.PropTypes.string
   },
@@ -83,9 +83,8 @@ var ContinuousScroll = React.createClass({
       this.unlistenScroll();
   },
   render: function() {
-
-    return this.transferPropsTo(
-      React.DOM.div({},
+    return (
+      React.DOM.div(this.props,
         React.DOM.div({ref: 'wrapper'},
           this.props.children
         ),
