@@ -56,6 +56,9 @@ var ContinuousScroll = React.createClass({
   },
   componentDidMount: function () {
     this.listenScroll();
+    
+    // About setTimeout: fluxxor enforce flux principle; dispatching an action during and action would trigger an error
+    setTimeout(this.onScroll);
   },
   componentDidUpdate: function () {
     var el = this.getDOMNode();
