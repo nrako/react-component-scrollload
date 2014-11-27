@@ -18,7 +18,7 @@ var ContinuousScroll = React.createClass({
   getDefaultProps: function () {
     return {
       threshold: 1000,
-      loader: React.DOM.div(null, 'Loading...'),
+      loader: React.createElement('div', null, 'Loading...'),
       disablePointer: 0,
       disablePointerClass: 'disable-pointer'
     };
@@ -84,8 +84,8 @@ var ContinuousScroll = React.createClass({
   },
   render: function() {
     return (
-      React.DOM.div(this.props,
-        React.DOM.div({ref: 'wrapper'},
+      React.createElement('div', this.props,
+        React.createElement('div', {ref: 'wrapper'},
           this.props.children
         ),
         this.props.isLoading && this.props.loader
