@@ -1,6 +1,6 @@
 {
   "name": "react-component-scrollload",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "React component to implement continuous load on scroll",
   "main": "index.js",
   "keywords": ["react", "infinite", "continuous", "scroll", "react-component"],
