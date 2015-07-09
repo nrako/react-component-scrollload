@@ -4,12 +4,14 @@
  */
 
 var React = require('react');
+var documentOffset = require('document-offset');
 
 var ContinuousScroll = React.createClass({
   propTypes: {
     hasMore: React.PropTypes.bool.isRequired,
     loadMore: React.PropTypes.func.isRequired,
     isLoading: React.PropTypes.bool.isRequired,
+    useDocument: React.PropTypes.bool,
     threshold: React.PropTypes.number,
     loader: React.PropTypes.element,
     disablePointer: React.PropTypes.number,
@@ -35,8 +37,9 @@ var ContinuousScroll = React.createClass({
       return;
 
     var el = this.getDOMNode();
+    var currentScroll = this.props.useDocument ? document.body.scrollTop + documentOffset(el).top : el.scrollTop + el.offsetHeight;
 
-    if (el.scrollTop + el.offsetHeight + this.props.threshold < el.scrollHeight)
+    if(currentScroll + this.props.threshold < el.scrollHeight)
       return;
 
     this.props.loadMore();
@@ -56,13 +59,11 @@ var ContinuousScroll = React.createClass({
   },
   componentDidMount: function () {
     this.listenScroll();
-    
+
     // About setTimeout: fluxxor enforce flux principle; dispatching an action during and action would trigger an error
     setTimeout(this.onScroll);
   },
   componentDidUpdate: function () {
-    var el = this.getDOMNode();
-
     // when component update need to check if loaded children height are bigger than threshold else load more
     // About setTimeout: fluxxor enforce flux principle; dispatching an action during and action would trigger an error
     setTimeout(this.onScroll);
@@ -71,11 +72,15 @@ var ContinuousScroll = React.createClass({
     this.unlistenScroll();
   },
   listenScroll: function () {
-    this.getDOMNode().addEventListener('scroll', this.onScroll);
+    var el = this.props.useDocument ? window : this.getDOMNode();
+
+    el.addEventListener('scroll', this.onScroll);
     window.addEventListener('resize', this.onScroll);
   },
   unlistenScroll: function () {
-    this.getDOMNode().removeEventListener('scroll', this.onScroll);
+    var el = this.props.useDocument ? window : this.getDOMNode();
+
+    el.removeEventListener('scroll', this.onScroll);
     window.removeEventListener('resize', this.onScroll);
   },
   componentWillReceiveProps: function (nextProps) {
