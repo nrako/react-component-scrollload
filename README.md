@@ -21,6 +21,7 @@ propTypes: {
   hasMore: React.PropTypes.bool.isRequired, // if there is more to load
   loadMore: React.PropTypes.func.isRequired, // callback to load more
   isLoading: React.PropTypes.bool.isRequired, // indicate if a loading is ongoing
+  useDocument: React.PropTypes.bool, // if true, the scrolling is calculated based on the document and not the element, default false
   threshold: React.PropTypes.number, // pixel threshold, default 1000
   loader: React.PropTypes.component, // displayed loader component, default React.DOM.div(null, 'Loading...')
 
