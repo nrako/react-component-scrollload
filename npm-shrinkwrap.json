@@ -1,5 +1,35 @@
 {
   "name": "react-component-scrollload",
-  "version": "0.2.2",
-  "dependencies": {}
+  "version": "0.3.0",
+  "dependencies": {
+    "document-offset": {
+      "version": "1.0.4",
+      "from": "document-offset@>=1.0.4 <2.0.0",
+      "resolved": "https://registry.npmjs.org/document-offset/-/document-offset-1.0.4.tgz",
+      "dependencies": {
+        "dom-support": {
+          "version": "0.0.2",
+          "from": "dom-support@*",
+          "resolved": "https://registry.npmjs.org/dom-support/-/dom-support-0.0.2.tgz",
+          "dependencies": {
+            "domready": {
+              "version": "1.0.8",
+              "from": "domready@*",
+              "resolved": "https://registry.npmjs.org/domready/-/domready-1.0.8.tgz"
+            }
+          }
+        },
+        "get-document": {
+          "version": "1.0.0",
+          "from": "get-document@1.0.0",
+          "resolved": "https://registry.npmjs.org/get-document/-/get-document-1.0.0.tgz"
+        },
+        "within-element": {
+          "version": "0.1.0",
+          "from": "within-element@0.1.0",
+          "resolved": "https://registry.npmjs.org/within-element/-/within-element-0.1.0.tgz"
+        }
+      }
+    }
+  }
 }
