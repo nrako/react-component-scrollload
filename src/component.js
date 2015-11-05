@@ -4,6 +4,7 @@
  */
 
 var React = require('react');
+var ReactDOM = require('react-dom');
 var documentOffset = require('document-offset');
 
 var ContinuousScroll = React.createClass({
@@ -36,7 +37,7 @@ var ContinuousScroll = React.createClass({
     if (!this.props.hasMore || this.props.isLoading)
       return;
 
-    var el = this.getDOMNode();
+    var el = ReactDOM.findDOMNode(this);
     var currentScroll = this.props.useDocument ? document.body.scrollTop + documentOffset(el).top : el.scrollTop + el.offsetHeight;
 
     if(currentScroll + this.props.threshold < el.scrollHeight)
@@ -46,14 +47,14 @@ var ContinuousScroll = React.createClass({
   },
   disablePointer: function () {
     if (this.disablePointerTimeout === null)
-      this.refs.wrapper.getDOMNode().classList.add(this.props.disablePointerClass);
+      this.refs.wrapper.classList.add(this.props.disablePointerClass);
 
     clearTimeout(this.disablePointerTimeout);
     this.disablePointerTimeout = setTimeout(this.removeDisablePointerClass, this.props.disablePointer);
   },
   removeDisablePointerClass: function () {
     if (this.refs.wrapper)
-      this.refs.wrapper.getDOMNode().classList.remove(this.props.disablePointerClass);
+      this.refs.wrapper.classList.remove(this.props.disablePointerClass);
 
     this.disablePointerTimeout = null;
   },
@@ -72,13 +73,13 @@ var ContinuousScroll = React.createClass({
     this.unlistenScroll();
   },
   listenScroll: function () {
-    var el = this.props.useDocument ? window : this.getDOMNode();
+    var el = this.props.useDocument ? window : ReactDOM.findDOMNode(this);
 
     el.addEventListener('scroll', this.onScroll);
     window.addEventListener('resize', this.onScroll);
   },
   unlistenScroll: function () {
-    var el = this.props.useDocument ? window : this.getDOMNode();
+    var el = this.props.useDocument ? window : ReactDOM.findDOMNode(this);
 
     el.removeEventListener('scroll', this.onScroll);
     window.removeEventListener('resize', this.onScroll);
