@@ -1,8 +1,3 @@
-
-/**
- * @jsx React.DOM
- */
-
 var React = require('react');
 var ReactDOM = require('react-dom');
 var documentOffset = require('document-offset');
@@ -38,7 +33,19 @@ var ContinuousScroll = React.createClass({
       return;
 
     var el = ReactDOM.findDOMNode(this);
-    var currentScroll = this.props.useDocument ? document.body.scrollTop + documentOffset(el).top : el.scrollTop + el.offsetHeight;
+    var currentScroll;
+
+    if (this.props.useDocument) {
+      // See http://stackoverflow.com/a/28633515/564163
+      currentScroll = (
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop ||
+        0
+      ) + documentOffset(el).top;
+    } else {
+      currentScroll = el.scrollTop + el.offsetHeight;
+    }
 
     if(currentScroll + this.props.threshold < el.scrollHeight)
       return;
